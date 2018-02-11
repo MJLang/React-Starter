@@ -1,0 +1,34 @@
+import * as React from 'react';
+
+{{#if route}}
+import { RouteComponentProps } from 'react-router';
+{{/if}}
+{{#if http}}
+import { withData, RemoteDataProps } from 'app/common/components/with-data';
+{{/if}}
+{{#if styles}}
+import './styles.scss';
+
+{{#if http}}
+interface Data {
+  data: {
+
+  }
+}
+{{/if}}
+
+
+/** Describes props from the parent component. These are the only props that the parent component must provide. */
+export interface PublicProps {}
+
+/** Ties all the all props together into a single type to pass to the component */
+type Props = PublicProps{{#if http}} & RemoteDataProps<Data>{{/if}};
+
+export const {{{nameComponent}}} = (props: Props) => {
+  return (
+
+  );
+};
+
+/** TODO: Describe what this component renders. */
+export const {{{nameExport}}}: React.SFC<PublicProps> = {{#if http}}withData({{/if}}{{{nameComponent}}}{{#if http}}){{/if}};

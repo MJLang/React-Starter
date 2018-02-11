@@ -1,0 +1,17 @@
+import { connect, Dispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { GlobalState } from 'app/common/models/global-state';
+import { {{{name}}}Component, PublicProps, ReduxDispatchProps, ReduxStateProps } from './component';
+
+function mapStateToProps(state: GlobalState): ReduxStateProps {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch: Dispatch<GlobalState>): ReduxDispatchProps {
+  return bindActionCreators({
+  }, dispatch);
+}
+
+/** TODO: Describe what this container does (this will be the documentation visible to consumers via IntelliSense). */
+export const {{{name}}} = connect(mapStateToProps, mapDispatchToProps)({{{name}}}Component) as React.ComponentClass<PublicProps>;

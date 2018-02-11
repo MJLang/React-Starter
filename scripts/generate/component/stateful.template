@@ -1,0 +1,99 @@
+import * as React from 'react';
+{{#if graphql}}
+import { QueryProps } from 'react-apollo';
+{{/if}}
+{{#if route}}
+import { RouteComponentProps } from 'react-router';
+{{/if}}
+{{#if graphql}}
+import * as {{{nameLower}}}Query from './{{{nameHyphen}}}.gql';
+{{/if}}
+{{#if http}}
+import { withData, RemoteDataProps } from 'app/common/components/with-data';
+{{/if}}
+{{#if styles}}
+import './styles.scss';
+{{/if}}
+
+
+/** Describes props from the parent component. These are the only props that the parent component must provide. */
+export interface PublicProps {}
+
+{{#if redux}}
+/** Describes props coming from the Redux container related to global state. */
+export interface ReduxStateProps {
+
+}
+
+/** Describes props coming from the Redux container used to dispatch actions. */
+export interface ReduxDispatchProps {
+
+}
+
+{{/if}}
+
+{{#if route}}
+/** Describes props coming from React Router. These props will be available at props.match.params.   */
+interface RouteProps {}
+
+{{/if}}
+
+{{#if http}}
+interface Data {
+  data: {
+
+  }
+}
+{{/if}}
+
+{{#if graphql}}
+/**
+ * Describes the data coming from GraphQL. Matches the structure of the query.
+ * See more details in the Data Access guide:
+ * https://git-aws.internal.justin.tv/pages/twilight/twilight-docs/docs/guides/data-access.html
+ */
+interface Data {
+  // We've provided a sample GQL query interface. See the .gql file in this folder for the
+  // corresponding query.
+  user: {
+    id: string;
+    displayName: string;
+  };
+}
+
+interface GraphQLProps {
+  data: Data & QueryProps;
+}
+
+{{/if}}
+/** Ties all the all props together into a single type to pass to the component */
+type Props = PublicProps {{#if route}}& RouteComponentProps<RouteProps>{{/if}}{{#if pubsub}} & PubsubComponentProps<PubsubProps>{{/if}}{{#if redux}} & ReduxDispatchProps & ReduxStateProps{{/if}}{{#if graphql }} & GraphQLProps{{/if}}{{#if http}} & RemoteDataProps<Data>{{/if}};
+
+/** Local state for this component */
+export interface State {}
+
+{{#if http}}
+@withData({url: ''})
+{{/if}}
+class {{{nameComponent}}} extends React.Component<Props, State> {
+  // Create initial state
+  public state: State = {};
+
+  public componentDidMount() {
+
+  }
+
+  public render() {
+    {{#if graphql }}
+
+    if (this.props.data.loading || this.props.data.error) {
+      return null;
+    }
+    {{/if}}
+    return (
+
+    );
+  }
+}
+
+export const {{{nameExport}}}: React.ComponentClass<PublicProps{{#if redux}} & ReduxStateProps & ReduxDispatchProps{{/if}}> = {{{nameComponent}}};

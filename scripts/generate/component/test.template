@@ -1,0 +1,11 @@
+// import * as Faker from 'faker';
+import { {{{componentImports}}} } from './component';
+
+const defaultPropsGenerator = (): PublicProps => ({
+
+});
+
+
+describe('{{{nameExport}}}', () => {
+
+});

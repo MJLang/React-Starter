@@ -1,0 +1,1 @@
+export * from './{{#if redux}}container{{else}}component{{/if}}';
